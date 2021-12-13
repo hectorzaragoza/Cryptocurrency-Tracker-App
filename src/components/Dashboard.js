@@ -1,10 +1,16 @@
-import { createFollowedCoin } from "../api/coindb"
-import { Link } from "react-router-dom"
-import '../index.css'
-
+import { createFollowedCoin, getFollowedCoins } from "../api/coindb"
+import { useState, useEffect } from "react"
+import { Link } from 'react-router-dom'
 
 const Dashboard = (props) => {
     const { msgAlert, coins, followedCoin, onClick, user } = props
+
+    useEffect (()=> {
+        getFollowedCoins(user)
+        .then(res => {
+            console.log("This is a coin: ", res.data.coins)
+        })
+    })
 
     const addCoin = (info) => {
         createFollowedCoin(info, user) 
