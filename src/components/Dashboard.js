@@ -1,5 +1,6 @@
 import { createFollowedCoin } from "../api/coindb"
-import { useState } from "react"
+import { Link } from "react-router-dom"
+import '../index.css'
 
 
 const Dashboard = (props) => {
@@ -16,9 +17,10 @@ const Dashboard = (props) => {
         return (
             <li key={i}>
                 <div>
-                    {c.id}
+                    <Link to= {c.id}> {c.id}</Link>
                     <br />
                     ${Number(c.priceUsd).toFixed(2)}
+                    <br />
                     <button onClick={() => addCoin(c)}>Add to Favorites</button>
                 </div>
             </li>
@@ -38,7 +40,7 @@ const Dashboard = (props) => {
 
     return (
         <>
-            <div>
+            <div className="dashboard">
                 <h2>This is your dashboard</h2>
                 <h4>Followed Coins: </h4>
                 <ul>

@@ -21,9 +21,6 @@ const App = () => {
 	let [coins, setCoins] = useState([])
 	let [showCoin, setShowCoin] = useState([])
 
-	console.log('user in app', user)
-	console.log('message alerts', msgAlerts)
-
 	let url = `https://api.coincap.io/v2/assets`
 
 	useEffect(() => {
