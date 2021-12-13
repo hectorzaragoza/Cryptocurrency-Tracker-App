@@ -1,9 +1,16 @@
-import { createFollowedCoin } from "../api/coindb"
-import { useState } from "react"
+import { createFollowedCoin, getFollowedCoins } from "../api/coindb"
+import { useState, useEffect } from "react"
 
 
 const Dashboard = (props) => {
     const { msgAlert, coins, followedCoin, onClick, user } = props
+
+    useEffect (()=> {
+        getFollowedCoins(user)
+        .then(res => {
+            console.log("This is a coin: ", res.data.coins)
+        })
+    })
 
     const addCoin = (info) => {
         createFollowedCoin(info, user) 

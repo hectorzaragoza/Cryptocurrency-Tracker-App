@@ -31,7 +31,7 @@ const App = () => {
 			.then(response => response.json())
 			.then((coinData) => {
 				coinData = Object.values(coinData)
-				console.log('These are the coins', coinData);
+				console.log('These are the coins', coinData)
 				setCoins(coinData[0])
 			})
 			.catch(err => console.error)

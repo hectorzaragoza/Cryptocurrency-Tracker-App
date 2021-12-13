@@ -26,3 +26,17 @@ export const createFollowedCoin = (info, user) => {
 		},
 	})
 }
+
+export const getFollowedCoins = (res, user) => {
+    return axios({
+		method: 'GET',
+        // headers: {
+        //     "Authorization": `Bearer ${user.token}`
+        // },
+		url: apiUrl + '/dashboard',
+	})
+    .then((res) => {
+        console.log("Response from database: ", res)
+        return res
+    })
+}
