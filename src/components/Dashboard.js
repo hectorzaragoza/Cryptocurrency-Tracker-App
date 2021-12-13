@@ -12,10 +12,9 @@ const Dashboard = (props) => {
             })
     }
 
-    console.log("Props: ", props)
     const allCoins = props.coins.map((c, i) => {
         return (
-            <li>
+            <li key={i}>
                 <div>
                     {c.id}
                     <br />
