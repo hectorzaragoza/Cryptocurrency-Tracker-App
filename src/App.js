@@ -13,7 +13,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Dashboard from './components/Dashboard'
-
+import EachCoin from './components/EachCoin'
 const App = () => {
 
 	const [user, setUser] = useState(null)
@@ -32,7 +32,7 @@ const App = () => {
 				setCoins(coinData[0])
 			})
 			.catch(err => console.error)
-	}, [])
+	}, [url])
 
 	const clearUser = () => {
 		console.log('clear user ran')
@@ -53,7 +53,7 @@ const App = () => {
 			)
 		})
 	}
-// Function to set show choin to the database
+	// Function to set show choin to the database
 	const addShowCoin = (e) => {
 		setShowCoin([...showCoin, e])
 	}
@@ -76,6 +76,7 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
+				<Route path="/dashboard/:id" element={<EachCoin coinData={coins}/>}></Route>
 				<Route
 					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}

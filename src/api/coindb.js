@@ -4,14 +4,14 @@ import axios from 'axios'
 export const createFollowedCoin = (info, user) => {
     console.log("User: ", user)
     console.log("Info: ", info)
-	return axios({
-		method: 'POST',
+    return axios({
+        method: 'POST',
         headers: {
             "Authorization": `Bearer ${user.token}`
         },
-		url: apiUrl + '/dashboard',
-		data: {
-			info: {
+        url: apiUrl + '/dashboard',
+        data: {
+            info: {
                 symbol: info.symbol,
                 marketCapUsd: info.marketCapUsd,
                 maxSupply: info.maxSupply,
@@ -22,32 +22,32 @@ export const createFollowedCoin = (info, user) => {
                 changePercent24Hr: info.changePercent24Hr,
                 volumeUsd24Hr: info.volumeUsd24Hr,
                 vwap24Hr: info.vwap24Hr,
-			},
-		},
-	})
+            },
+        },
+    })
 }
 
 export const getFollowedCoins = (res, user) => {
     return axios({
-		method: 'GET',
+        method: 'GET',
         // headers: {
         //     "Authorization": `Bearer ${user.token}`
         // },
-		url: apiUrl + '/dashboard',
-	})
-    .then((res) => {
-        console.log("Response from database: ", res)
-        return res
+        url: apiUrl + '/dashboard',
     })
+        .then((res) => {
+            console.log("Response from database: ", res)
+            return res
+        })
 }
 
 export const deleteCoin = (id, user) => {
     console.log('This is the id in coindb api Delete: ', id)
-	return axios({
-		url: apiUrl + '/dashboard' + `/${id}`,
-		method: 'DELETE',
-		// headers: {
-		// 	Authorization: `Token token=${user.token}`,
-		// },
-	})
+    return axios({
+        url: `${apiUrl}/dashboard/${id}`,
+        method: 'DELETE',
+        // headers: {
+        // 	Authorization: `Token token=${user.token}`,
+        // },
+    })
 }
