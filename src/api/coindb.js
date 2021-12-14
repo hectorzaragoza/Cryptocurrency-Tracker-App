@@ -40,3 +40,14 @@ export const getFollowedCoins = (res, user) => {
         return res
     })
 }
+
+export const deleteCoin = (id, user) => {
+    console.log('This is the id in coindb api Delete: ', id)
+	return axios({
+		url: apiUrl + '/dashboard' + `/${id}`,
+		method: 'DELETE',
+		// headers: {
+		// 	Authorization: `Token token=${user.token}`,
+		// },
+	})
+}
