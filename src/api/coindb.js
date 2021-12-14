@@ -12,6 +12,7 @@ export const createFollowedCoin = (info, user) => {
         url: apiUrl + '/dashboard',
         data: {
             info: {
+                id: info.id,
                 symbol: info.symbol,
                 marketCapUsd: info.marketCapUsd,
                 maxSupply: info.maxSupply,
@@ -36,7 +37,6 @@ export const getFollowedCoins = (res, user) => {
         url: apiUrl + '/dashboard',
     })
         .then((res) => {
-            console.log("Response from database: ", res)
             return res
         })
 }

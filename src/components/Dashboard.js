@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 function Dashboard(props) {
     const { user } = props
-    console.log(user);
     const [savedCoins, setSavedCoins] = useState([])
 
     // This useEffect and Function is to GET all the saved Coins from the Database
@@ -14,7 +13,6 @@ function Dashboard(props) {
             .then(res => {
                 res = Object.values(res.data.coins)
                 setSavedCoins(res)
-                console.log('Object.values output', res)
             })
     }, [])
 
@@ -39,7 +37,7 @@ function Dashboard(props) {
         return (
             <li key={i}>
                 <div>
-                    <Link to={`${c.id}`}> {c.id}</Link>
+                    <Link to={`${c.id}`}>{c.name}</Link>
                     <br />
                     ${Number(c.priceUsd).toFixed(2)}
                     <br />
@@ -54,7 +52,7 @@ function Dashboard(props) {
         return (
             <li key={i}>
                 <div>
-                    {s.name}
+                    <Link to={`${s.id}`}>{s.name}</Link>
                 </div>
                 <button onClick={() => removeCoin(s)}>Remove Coin</button>
             </li>
