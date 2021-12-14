@@ -28,12 +28,12 @@ export const createFollowedCoin = (info, user) => {
     })
 }
 
-export const getFollowedCoins = (res, user) => {
+export const getFollowedCoins = (res) => {
     return axios({
         method: 'GET',
-        // headers: {
-        //     "Authorization": `Bearer ${user.token}`
-        // },
+        headers: {
+            "Authorization": `Bearer ${res.token}`
+        },
         url: apiUrl + '/dashboard',
     })
         .then((res) => {
