@@ -17,3 +17,14 @@ code {
   right: 10px;
   float: right;
 }
+
+li {
+  list-style: none;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+}
