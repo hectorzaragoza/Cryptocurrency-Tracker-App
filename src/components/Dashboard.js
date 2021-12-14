@@ -1,22 +1,35 @@
-import { createFollowedCoin, getFollowedCoins } from "../api/coindb"
+import { createFollowedCoin, getFollowedCoins, deleteCoin } from "../api/coindb"
 import { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 
 const Dashboard = (props) => {
     const { msgAlert, coins, followedCoin, onClick, user } = props
+    const [savedCoins, setSavedCoins] = useState([])
 
+// This useEffect and Function is to GET all the saved Coins from the Database
     useEffect (()=> {
         getFollowedCoins(user)
         .then(res => {
-            console.log("This is a coin: ", res.data.coins)
+            res = Object.values(res.data.coins)
+            setSavedCoins(res)
+            console.log('Object.values output', res)
         })
-    })
+    }, [])
 
+// This Function is to POST coins to the saved collection in the database
     const addCoin = (info) => {
         createFollowedCoin(info, user) 
             .then(res => {
                 console.log("This is response: ", res)
             })
+    }
+
+// This Function is to DELETE coins from the saved collection in the database
+    const removeCoin = (s) => {
+        deleteCoin(s._id)
+        .then(res => {
+            console.log('This is the coin to be deleted: ', res)
+        })
     }
 
     const allCoins = props.coins.map((c, i) => {
@@ -30,16 +43,16 @@ const Dashboard = (props) => {
                     <button onClick={() => addCoin(c)}>Add to Favorites</button>
                 </div>
             </li>
-
         )
     })
 
-    const followedCoins = props.followedCoin.map((f, i) => {
+    const followedCoins = savedCoins.map((s, i) => {
         return (
             <li>
                 <div>
-                    {f.name}
+                    {s.name}
                 </div>
+                <button onClick={() => removeCoin(s)}>Remove Coin</button>
             </li>
         )
     })
