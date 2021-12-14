@@ -14,13 +14,13 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Dashboard from './components/Dashboard'
 import EachCoin from './components/EachCoin'
+import Contact from './components/Contact'
 const App = () => {
 
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
 	let [coins, setCoins] = useState([])
 	let [showCoin, setShowCoin] = useState([])
-
 	let url = `https://api.coincap.io/v2/assets`
 
 	useEffect(() => {
@@ -32,7 +32,7 @@ const App = () => {
 				setCoins(coinData[0])
 			})
 			.catch(err => console.error)
-	}, [url])
+	}, [coins])
 
 	const clearUser = () => {
 		console.log('clear user ran')
@@ -77,6 +77,7 @@ const App = () => {
 					}
 				/>
 				<Route path="/dashboard/:id" element={<EachCoin coinData={coins}/>}></Route>
+				<Route path="/contacts" element={<Contact />} />
 				<Route
 					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
