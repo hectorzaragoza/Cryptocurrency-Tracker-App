@@ -5,14 +5,15 @@ import { Link } from 'react-router-dom'
 
 function Dashboard(props) {
     const { user } = props
-    const [savedCoins, setSavedCoins] = useState([])
 
     // This useEffect and Function is to GET all the saved Coins from the Database
     useEffect(() => {
         getFollowedCoins(user)
             .then(res => {
+                console.log('This is our Res for GetFOllowedCoins ', res)
                 res = Object.values(res.data.coins)
-                setSavedCoins(res)
+                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                props.setSavedCoins(res)
             })
     }, [])
 
@@ -48,7 +49,7 @@ function Dashboard(props) {
     })
 
 
-    const followedCoins = savedCoins.map((s, i) => {
+    const followedCoins = props.savedCoins.map((s, i) => {
         return (
             <li key={i}>
                 <div>

@@ -21,6 +21,8 @@ const App = () => {
 	const [msgAlerts, setMsgAlerts] = useState([])
 	let [coins, setCoins] = useState([])
 	let [showCoin, setShowCoin] = useState([])
+	const [savedCoins, setSavedCoins] = useState([])
+	
 	let url = `https://api.coincap.io/v2/assets`
 
 	useEffect(() => {
@@ -72,11 +74,13 @@ const App = () => {
 								coins={coins}
 								followedCoin={showCoin}
 								onClick={addShowCoin}
+								savedCoins={savedCoins}
+								setSavedCoins={setSavedCoins}
 								user={user} />
 						</RequireAuth>
 					}
 				/>
-				<Route path="/dashboard/:id" element={<EachCoin coinData={coins}/>}></Route>
+				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} user={user} savedCoins={savedCoins}/>}></Route>
 				<Route path="/contacts" element={<Contact />} />
 				<Route
 					path='/sign-up'
