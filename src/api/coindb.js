@@ -1,6 +1,6 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
-
+import { useEffect } from 'react'
 
 export const createFollowedCoin = (info, user) => {
     console.log("User: ", user)
@@ -29,25 +29,20 @@ export const createFollowedCoin = (info, user) => {
     })
 }
 
-
 export const getFollowedCoins = (res) => {
-    
-    return axios({
+        return axios({
         method: 'GET',
         headers: {
             "Authorization": `Bearer ${res.token}`
         },
         url: apiUrl + '/dashboard'
     })
-        .then((res) => {
-            
+        .then(res => {
+            console.log('getFollowedCoins called')
             return res
         })
         .catch((error) => console.log(error))
-        .finally(() =>{
-            console.log('getFollowedCoins called')
-        })
-}
+    }
 
 
 export const deleteCoin = (id, user) => {

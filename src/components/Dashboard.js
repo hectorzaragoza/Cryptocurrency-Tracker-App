@@ -6,20 +6,31 @@ import { Link } from 'react-router-dom'
 function Dashboard(props) {
     const { user } = props
     let [usersSavedCoins, setUsersSavedCoins] = useState([])
-    let [followedCoins, setFollowedCoins] = useState([])
-    
+
     // This Function is to POST coins to the saved collection in the database
     const addCoin = (info) => {
         createFollowedCoin(info, user)
             .then(res => {
-                console.log("This is response: ", res)
+                getFollowedCoins(user)
+                    .then(res => {
+                        res = Object.values(res.data.coins)
+                        console.log('res spam');
+                        setUsersSavedCoins(res)
+                    })
             })
     }
+
+
     // This Function is to DELETE coins from the saved collection in the database
     const removeCoin = (s) => {
         deleteCoin(s._id)
             .then(res => {
-                console.log('This is the coin to be deleted: ', res)
+                getFollowedCoins(user)
+                    .then(res => {
+                        res = Object.values(res.data.coins)
+                        console.log('res spam');
+                        setUsersSavedCoins(res)
+                    })
 
             })
     }
@@ -31,15 +42,14 @@ function Dashboard(props) {
                     <Link to={`${c.id}`}>{c.name}</Link>
                     {c.symbol}
                     ${Number(c.priceUsd).toFixed(2)}
-                    <button onClick={() => addCoin(c)}>Add to Favorites</button>
+                    <button onClick={() => addCoin(c)}>Favorite</button>
                 </div>
             </li>
         )
     })
 
-    
 
-    followedCoins = usersSavedCoins.map((s, i) => {
+    let usersSavedCoinsNotMapped = usersSavedCoins.map((s, i) => {
         return (
             <li key={i}>
                 <div>
@@ -50,36 +60,42 @@ function Dashboard(props) {
         )
 
     })
-    
+
+
 
     // This useEffect and Function is to GET all the saved Coins from the Database
+    // useEffect(() => {
+    //     let isMounted = true
+    //     getFollowedCoins(user)
+    //         .then((res) => {
+    //             console.log('res spam')
+    //             if (isMounted) {
+    //                 res = Object.values(res.data.coins)
+    //                 setUsersSavedCoins(res)
+    //             }
+    //         })
+    //     return () => {
+    //         isMounted = false
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [usersSavedCoinsNotMapped])
     useEffect(() => {
         getFollowedCoins(user)
             .then(res => {
-                console.log('res spam')
                 res = Object.values(res.data.coins)
+                console.log('res spam');
                 setUsersSavedCoins(res)
             })
-            .catch((err)=> {
-                console.log(err);
-            })
-            // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    useEffect(() => {
-        setFollowedCoins([...usersSavedCoins])
-    }, [usersSavedCoins])
-
-
     return (
-
 
         <>
             <div className="dashboard">
                 <h2>This is your dashboard</h2>
                 <h4>Followed Coins: </h4>
                 <ul>
-                    {followedCoins}
+                    {usersSavedCoinsNotMapped}
                 </ul>
                 <h4>Cryptos</h4>
                 <ul>

@@ -82,7 +82,6 @@ const App = () => {
 							<Dashboard
 								msgAlert={msgAlert}
 								coins={coins}
-								
 								onClick={addShowCoin}
 								user={user} />
 						</RequireAuth>
