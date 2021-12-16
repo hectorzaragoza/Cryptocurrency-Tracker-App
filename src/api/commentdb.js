@@ -22,3 +22,17 @@ export const createCommentEntry = (content, user, coinContent, matchedCoin) => {
         },
     })
 }
+
+export const deleteComment = (id, matchedCoin) => {
+    console.log('This is the id in comment api Delete: ', id)
+    return axios({
+        url: `${apiUrl}/dashboard/comment/${id}`,
+        method: 'DELETE',
+        data: {
+            matchedCoin
+        }
+        // headers: {
+        // 	Authorization: `Token token=${user.token}`,
+        // },
+    })
+}

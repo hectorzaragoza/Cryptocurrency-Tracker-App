@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { createCommentEntry } from '../api/commentdb'
+import { createCommentEntry, deleteComment } from '../api/commentdb'
 import { useState } from 'react'
 
 const EachCoin = (props) => {
@@ -23,6 +23,21 @@ const EachCoin = (props) => {
         createCommentEntry(formData, user, coinContent, matchedCoin)
     }
 
+    const removeComment = (c) => {
+        deleteComment(c._id, matchedCoin)
+    }
+    // console.log("This is the coin content: ", matchedCoin[0].comments[0].content)
+    console.log("This is the comment content: ", matchedCoin[0].comments)
+
+    const comments = matchedCoin[0].comments.map((c, i) => {
+        return (
+            <li key={i}>
+                {c.content}
+                <button onClick={() => removeComment(c)} id="delete">Delete</button>
+            </li>
+        )
+    })
+
     return (
         <div>
             <h1>{coinContent.name}</h1>
@@ -30,6 +45,9 @@ const EachCoin = (props) => {
             <h3>{coinContent.priceUsd}</h3>
             <p>{coinContent.supply}</p>
             <p>{coinContent.changePercent24Hr}</p>
+            <ul className="comments">
+                {comments}
+            </ul>
             <div className="commentForm">
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="textArea">Thoughts on {coinContent.symbol}?</label>
