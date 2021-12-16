@@ -1,6 +1,7 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
+
 export const createFollowedCoin = (info, user) => {
     console.log("User: ", user)
     console.log("Info: ", info)
@@ -28,18 +29,26 @@ export const createFollowedCoin = (info, user) => {
     })
 }
 
+
 export const getFollowedCoins = (res) => {
+    
     return axios({
         method: 'GET',
         headers: {
             "Authorization": `Bearer ${res.token}`
         },
-        url: apiUrl + '/dashboard',
+        url: apiUrl + '/dashboard'
     })
         .then((res) => {
+            
             return res
         })
+        .catch((error) => console.log(error))
+        .finally(() =>{
+            console.log('getFollowedCoins called')
+        })
 }
+
 
 export const deleteCoin = (id, user) => {
     console.log('This is the id in coindb api Delete: ', id)
