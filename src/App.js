@@ -111,6 +111,7 @@ const App = () => {
 					coinData={coins}
 					user={user}
 					savedCoins={savedCoins} 
+					setSavedCoins={setSavedCoins}
 				/>
 				}
 				>

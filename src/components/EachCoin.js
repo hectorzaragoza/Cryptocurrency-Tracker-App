@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { createCommentEntry, deleteComment, editCommentRoute } from '../api/commentdb
+import { createCommentEntry, deleteComment, editCommentRoute } from '../api/commentdb'
 import { getFollowedCoins } from "../api/coindb"
 import { useState, useEffect } from 'react'
 import {
