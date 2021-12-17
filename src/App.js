@@ -1,7 +1,9 @@
+
 // import React, { Component, Fragment } from 'react'
 import React, { useState, useEffect, Fragment } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Link } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
+
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
@@ -15,6 +17,7 @@ import ChangePassword from './components/auth/ChangePassword'
 import Dashboard from './components/Dashboard'
 import EachCoin from './components/EachCoin'
 import Contact from './components/Contact'
+require('dotenv').config()
 const App = () => {
 
 	const [user, setUser] = useState(null)
@@ -22,29 +25,29 @@ const App = () => {
 	let [coins, setCoins] = useState([])
 	let [showCoin, setShowCoin] = useState([])
 	const [savedCoins, setSavedCoins] = useState([])
-	
+
 	// let url = `https://api.coincap.io/v2/assets`
 	let url = "http://localhost:8000"
 
-    useEffect(() => {
-        getCoins()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user])
+	useEffect(() => {
+		getCoins()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [user])
 
-    const getCoins = () => {
-        fetch(url, {
-            method: 'GET',
-            credentials: 'omit',
-            redirect: 'follow'
-        })
-            .then(response => response.json())
-            .then((coinData) => {
-                coinData = Object.values(coinData)
-                console.log('Spam????');
-                setCoins(coinData[0])
-            })
-            .catch(err => console.log(err))
-    }
+	const getCoins = () => {
+		fetch(url, {
+			method: 'GET',
+			credentials: 'omit',
+			redirect: 'follow'
+		})
+			.then(response => response.json())
+			.then((coinData) => {
+				coinData = Object.values(coinData)
+				console.log('Spam????');
+				setCoins(coinData[0])
+			})
+			.catch(err => console.log(err))
+	}
 	// useEffect(() => {
 	// 	fetch(url)
 	// 		.then(response => response.json())
@@ -75,11 +78,13 @@ const App = () => {
 			)
 		})
 	}
-	// Function to set show choin to the database
+	// Function to set show coin to the database
 	const addShowCoin = (e) => {
 		setShowCoin([...showCoin, e])
 	}
 	
+
+
 
 	return (
 		<Fragment>
@@ -101,7 +106,15 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
-				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} user={user} savedCoins={savedCoins} setSavedCoins={setSavedCoins}/>}></Route>
+				<Route path="/dashboard/:id" element={
+				<EachCoin
+					coinData={coins}
+					user={user}
+					savedCoins={savedCoins} 
+				/>
+				}
+				>
+				</Route>
 				<Route path="/contacts" element={<Contact />} />
 				<Route
 					path='/sign-up'

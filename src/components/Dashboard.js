@@ -2,7 +2,6 @@ import { createFollowedCoin, getFollowedCoins, deleteCoin } from "../api/coindb"
 import { useEffect, React } from "react"
 import { Link } from 'react-router-dom'
 
-
 function Dashboard(props) {
     const { user } = props
     // This useEffect and Function is to GET all the saved Coins from the Database
@@ -71,8 +70,6 @@ function Dashboard(props) {
     })
 
     return (
-
-
         <>
             <div className="dashboard">
                 <h2>This is your dashboard</h2>
@@ -80,7 +77,7 @@ function Dashboard(props) {
                 <ul>
                     {followedCoins}
                 </ul>
-                <h4>Current Info on coins: </h4>
+                <h4>Cryptos</h4>
                 <ul>
                     {allCoins}
                 </ul>

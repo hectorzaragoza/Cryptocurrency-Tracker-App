@@ -98,10 +98,6 @@ code {
   font-size: large;
 }
 
-
-
-
-
 #cryptoByte {
   font-family: 'Monoton', cursive;
   font-size:xx-large;
@@ -115,6 +111,7 @@ code {
   align-content: space-between;
 }
 
+
 #dashboard {
   display: flex;
   flex-direction: column;
@@ -123,6 +120,7 @@ code {
   /* background-color: #001244ef; */
   color: white;
   /* padding-bottom: 100%; */
+
 }
 
 .col-sm-3 {
@@ -179,4 +177,10 @@ li {
 
 a:link {
   text-decoration: none;
+}
+.row {
+  display: flex;
+}
+.column {
+  flex: 50%
 }
