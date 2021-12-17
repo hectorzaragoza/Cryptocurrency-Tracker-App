@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
-import { createCommentEntry, deleteComment, editCommentRoute } from '../api/commentdb'
+import { createCommentEntry, deleteComment, editCommentRoute } from '../api/commentdb
+import { getFollowedCoins } from "../api/coindb"
 import { useState, useEffect } from 'react'
 import {
     Chart as ChartJS,
@@ -23,9 +24,8 @@ ChartJS.register(
     Legend
 );
 
-
 const EachCoin = (props) => {
-    const { user, savedCoins } = props
+    const { user, savedCoins, setSavedCoins } = props
     const coinName = useParams()
     let coinContent = props.coinData.filter(name => name.id.toLowerCase() === coinName.id.toLowerCase())
     coinContent = coinContent[0]
@@ -36,6 +36,7 @@ const EachCoin = (props) => {
     const [formData, setFormData] = useState('')
     // This is the state to hold the edit form content
     const [editedContent, setEditedContent] = useState('')
+    
 
     const handleChange = (e) => {
         console.log('This is the event returned from the form: ', e.target.value)
@@ -46,25 +47,56 @@ const EachCoin = (props) => {
         //This is where I can call the POST route in the commentdb api
         e.preventDefault()
         createCommentEntry(formData, user, coinContent, matchedCoin)
+        .then(res => {
+            getFollowedCoins(user)
+            .then(res => {
+                console.log('This is our Res for GetFOllowedCoins ', res)
+                res = Object.values(res.data.coins)
+                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                setSavedCoins(res)
+            })
+        })
     }
 
     const removeComment = (c) => {
         deleteComment(c._id, matchedCoin)
+            .then(res => {
+                getFollowedCoins(user)
+                .then(res => {
+                    console.log('This is our Res for GetFOllowedCoins ', res)
+                    res = Object.values(res.data.coins)
+                    console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                    setSavedCoins(res)
+                })
+        })
     }
     // console.log("This is the coin content: ", matchedCoin[0].comments[0].content)
     // console.log("This is the comment content: ", matchedCoin[0].comments)
 
     // These three functions will handle the EDIT functionality (handleEditSubmit, handleEditChange, and editComment)
-    const handleEditSubmit = () => {
+    const handleEditSubmit = (e) => {
         // This will call the PUT route in commentdb and pass
         // in the content payload, the id of the savedcoin, and 
         // the id of the comment.
+        e.preventDefault()
         editCommentRoute(editedContent, matchedCoin)
+        .then(res => {
+            getFollowedCoins(user)
+            .then(res => {
+                console.log('This is our Res for GetFOllowedCoins ', res)
+                res = Object.values(res.data.coins)
+                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                setSavedCoins(res)
+            })
+        })
+        
+        // console.log(`These are the three things we need:  ${editedContent} and matched coin ${matchedCoin[0]._id} and these are the comments: ${matchedCoin[0].comments[0]._id}`)
     }
 
     const handleEditChange = (editFormContent) => {
         // This will set the state of  the edit form content
-        setEditedContent(editFormContent)
+        console.log('onchange content, ', editFormContent.target.value)
+        setEditedContent(editFormContent.target.value)
     }
 
     const editComment = (c) => {
@@ -104,13 +136,20 @@ const EachCoin = (props) => {
         chart()
     }, [])
 
-
     const comments = matchedCoin[0].comments.map((c, i) => {
+        // console.log('This the coin holding the comment: ', c)
         return (
             <li key={i}>
                 {c.content}
+                <br/>
                 <button onClick={() => removeComment(c)} id="delete">Delete</button>
-                <button onClick={() => editComment(c)}>Edit</button>
+                <form onSubmit={handleEditSubmit}>
+                    <label htmlFor="editForm">Edit Comment</label>
+                    <br/>
+                    <input type="text" id="editForm" placeholder={c.content} onChange={handleEditChange}/>
+                    <br/>
+                    <input type="submit" value="Edit"></input>
+                </form>
             </li>
         )
     })
@@ -148,10 +187,8 @@ const EachCoin = (props) => {
                     <Line data={data} />
                 </div>
             </div>
-
         </div>
     )
-
 }
 
 export default EachCoin

@@ -1,10 +1,9 @@
 import { createFollowedCoin, getFollowedCoins, deleteCoin } from "../api/coindb"
-import { useState, useEffect, React } from "react"
+import { useEffect, React } from "react"
 import { Link } from 'react-router-dom'
 
 function Dashboard(props) {
     const { user } = props
-
     // This useEffect and Function is to GET all the saved Coins from the Database
     useEffect(() => {
         getFollowedCoins(user)
@@ -27,7 +26,6 @@ function Dashboard(props) {
                 console.log('This is our Res for 2nd GetFOllowedCoins ', res)
                 props.setSavedCoins(res)
             })
-
             })
     }
 

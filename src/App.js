@@ -82,6 +82,7 @@ const App = () => {
 	const addShowCoin = (e) => {
 		setShowCoin([...showCoin, e])
 	}
+	
 
 
 
