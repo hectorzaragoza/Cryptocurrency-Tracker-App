@@ -26,81 +26,40 @@ const App = () => {
 	const [msgAlerts, setMsgAlerts] = useState([])
 	let [coins, setCoins] = useState([])
 	let [showCoin, setShowCoin] = useState([])
-	let [usersSavedCoins, setUsersSavedCoins] = useState([])
-	let [usersCoins, setUsersCoins] = useState([])
+	const [savedCoins, setSavedCoins] = useState([])
+	
+	// let url = `https://api.coincap.io/v2/assets`
 	let url = "http://localhost:8000"
 
-	useEffect(() => {
-		getCoins()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user])
+    useEffect(() => {
+        getCoins()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user])
 
-	const getCoins = () => {
-		fetch(url, {
-			method: 'GET',
-			credentials: 'omit',
-			redirect: 'follow'
-		})
-			.then(response => response.json())
-			.then((coinData) => {
-				coinData = Object.values(coinData)
-				console.log('Spam????');
-				setCoins(coinData[0])
-			})
-			.catch(err => console.log(err))
-	}
-
-	// This Function is to POST coins to the saved collection in the database
-	const addCoin = (info) => {
-		createFollowedCoin(info, user)
-			.then(res => {
-				getFollowedCoins(user)
-					.then(res => {
-						res = Object.values(res.data.coins)
-						console.log('res spam');
-						setUsersSavedCoins(res)
-					})
-			})
-	}
-
-	// This Function is to DELETE coins from the saved collection in the database
-	const removeCoin = (s) => {
-		deleteCoin(s._id)
-			.then(res => {
-				getFollowedCoins(user)
-					.then(res => {
-						res = Object.values(res.data.coins)
-						console.log('res spam');
-						setUsersSavedCoins(res)
-					})
-
-			})
-	}
-	// TRY OUT ON CLICK FUNCTION ON ADD TO FAVORITES TO SETSTATE OF FOLLOWEDCOINS TO UPDATED COINS
-	let allCoins = coins.map((c, i) => {
-		return (
-			<li key={i}>
-				<div className="coinsFromAPI">
-					<Link to={`${c.id}`}>{c.name}</Link>
-					{c.symbol}
-					${Number(c.priceUsd).toFixed(2)}
-					<button onClick={() => addCoin(c)}>Favorite</button>
-				</div>
-			</li>
-		)
-	})
-
-	usersCoins = usersSavedCoins.map((s, i) => {
-		return (
-			<li key={i}>
-				<div>
-					<Link to={`${s.id}`}>{s.name}</Link>
-					<button onClick={() => removeCoin(s)}>Remove Coin</button>
-				</div>
-			</li>
-		)
-
-	})
+    const getCoins = () => {
+        fetch(url, {
+            method: 'GET',
+            credentials: 'omit',
+            redirect: 'follow'
+        })
+            .then(response => response.json())
+            .then((coinData) => {
+                coinData = Object.values(coinData)
+                console.log('Spam????');
+                setCoins(coinData[0])
+            })
+            .catch(err => console.log(err))
+    }
+	// useEffect(() => {
+	// 	fetch(url)
+	// 		.then(response => response.json())
+	// 		.then((coinData) => {
+	// 			coinData = Object.values(coinData)
+	// 			console.log('These are the coins', coinData)
+	// 			setCoins(coinData[0])
+	// 		})
+	// 		.catch(err => console.error)
+	// }, [coins])
 
 	const clearUser = () => {
 		console.log('clear user ran')
@@ -139,13 +98,16 @@ const App = () => {
 						<RequireAuth user={user}>
 							<Dashboard
 								msgAlert={msgAlert}
-								usersCoins={usersCoins}
-								allCoins={allCoins}
+								coins={coins}
+								followedCoin={showCoin}
+								onClick={addShowCoin}
+								savedCoins={savedCoins}
+								setSavedCoins={setSavedCoins}
 								user={user} />
 						</RequireAuth>
 					}
 				/>
-				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} />}></Route>
+				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} user={user} savedCoins={savedCoins}/>}></Route>
 				<Route path="/contacts" element={<Contact />} />
 				<Route
 					path='/sign-up'
