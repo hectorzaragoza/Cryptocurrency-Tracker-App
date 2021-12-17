@@ -36,3 +36,17 @@ export const deleteComment = (id, matchedCoin) => {
         // },
     })
 }
+
+export const editCommentRoute = (comment, matchedCoin) => {
+	return axios({
+		url: `${apiUrl}/dashboard/comment/${comment._id}`,
+		method: 'PATCH',
+		// headers: {
+		// 	Authorization: `Token token=${user.token}`,
+		// },
+		data: {
+			comment,
+            matchedCoin
+		},
+	})
+}
