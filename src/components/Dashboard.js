@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+import { createFollowedCoin, getFollowedCoins, deleteCoin } from "../api/coindb"
+import { useState, useEffect, React } from "react"
+import { Link } from 'react-router-dom'
 
 function Dashboard(props) {
     const { user } = props
@@ -75,11 +77,11 @@ function Dashboard(props) {
                 <h2>This is your dashboard</h2>
                 <h4>Followed Coins: </h4>
                 <ul>
-                    {props.usersCoins}
+                    {followedCoins}
                 </ul>
                 <h4>Cryptos</h4>
                 <ul>
-                    {props.allCoins}
+                    {allCoins}
                 </ul>
             </div>
         </>
