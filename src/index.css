@@ -1,33 +1,181 @@
-body {
+html {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+  height: 100%;
+  width: 100%;
+  background-color: hsla(200,40%,30%,.4);
+  color: white;
+  background-image:   
+    url('https://www.pngall.com/wp-content/uploads/2016/03/Cloud-PNG-2.png'),
+    url('https://uncnews.unc.edu/wp-content/uploads/sites/933/2020/11/shutterstock_264839402-scaled.jpg');
+  background-repeat: repeat-x;
+  background-position: 
+    0 50%,
+    0 20%;
+  background-size: 
+    50%,
+    2880px 1800px;
+  animation: 50s para infinite linear;
+  }
+
+
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  height: 100%;
+  width: 100%;
+  background-color: hsla(200,40%,30%,.4);
+  color: white;
+  background-image:   
+    url('https://www.pngall.com/wp-content/uploads/2016/03/Cloud-PNG-2.png'),
+    url('https://uncnews.unc.edu/wp-content/uploads/sites/933/2020/11/shutterstock_264839402-scaled.jpg');
+  background-repeat: repeat-x;
+  background-position: 
+    0 50%,
+    0 20%;
+  background-size: 
+    50%,
+    2880px 1800px;
+  animation: 50s para infinite linear;
+  }
+
+  @keyframes para {
+    100% {
+      background-position: 
+        500px 50%,
+        -5000px 20%;
+      }
+  }
+
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Roboto', sans-serif;
 }
 
-.signOut {
-  position:absolute;
-  right: 10px;
-  float: right;
+#root{
+  color: white;
 }
+
+/* NAVBAR STYLING */
+
+.signOut{
+  padding: 7px;
+  font-size: small;
+}
+.dashboard {
+  padding: 7px;
+  font-size: small;
+}
+.changepassword {
+  padding: 7px;
+  font-size: small;
+}
+.signup {
+  padding: 7px;
+  font-size: small;
+}
+.signin{
+  padding: 7px;
+  font-size: small;
+}
+.home {
+  padding: 7px;
+  font-size: small;
+}
+.contacts {
+  padding: 7px;
+  font-size: small;
+}
+.navbar-text-mr-2 {
+  color: white;
+  padding-right: 30px;
+  font-size: large;
+}
+
+
+
+
+
+#cryptoByte {
+  font-family: 'Monoton', cursive;
+  font-size:xx-large;
+  padding-left: 5%;
+}
+.navbar-nav {
+  position:absolute;
+  right: 1%;
+  float: right;
+  justify-content: flex-end;
+  align-content: space-between;
+}
+
+#dashboard {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  float: center;
+  /* background-color: #001244ef; */
+  color: white;
+  /* padding-bottom: 100%; */
+}
+
+.col-sm-3 {
+  text-align: center;
+  padding-top: 10%;
+  font-size: small;
+}
+
+.contact {
+  text-align: center;
+  float: center;
+  padding-top: 5%;
+  /* padding-bottom: 100%; */
+  /* background-color: #001244ef; */
+  color: white;
+}
+
+#homepage {
+  flex-direction: column;
+  text-align: center;
+  float: center;
+  padding-top: 50px;
+  /* padding-bottom: 100%; */
+  /* background-color: #001244ef; */
+  color: white;
+  /* background: linear-gradient(-45deg, #31353f, #1e2e61, #204755, #31584f);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  } */
+}
+
+.row {
+  padding-bottom: 100%;
+} 
+
 
 li {
   list-style: none;
 }
 
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
 
-}
 
 a:link {
   text-decoration: none;
