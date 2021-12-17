@@ -10,8 +10,8 @@ const Contact = (props) => {
     return (
         <div className="contact">
             <div id="contactHeader">
-                <h1>Crypto/Bytes Team</h1>
-                <h2>Connect with Us.  We'd love to Chat.</h2>
+                <h1><b><u>Crypto/Bytes Team</u></b></h1><br></br>
+                <h3>Connect with Us.  We'd love to Chat.</h3>
             </div>
             <div class="row">
                 <div className="col-sm-3">

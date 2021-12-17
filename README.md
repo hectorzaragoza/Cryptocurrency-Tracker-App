@@ -1,38 +1,24 @@
-# Getting Started with Create React App
+# Crypto/Byte
+// screenshot of the site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Technologies used:
+-MongoDB
+-Mongoose
+-Node
+-React
+-Express
+-Bootstrap
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### General Approach
 
 
-## Learn More
+### Installation Instructions
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### User Stories
+User can create a profile to visit a page to learn more about what cryptocurrencies are, then have a dashboard that shows the top cryptocurrencies (stretch goal: ticker of general crypto news stories a la News of the World), the user can select coins to add to their "Follow" list and upon pressing on one, be led to a show page that shows a line graph of the specific coin's historical data. (stretch goal: make this run in "real-time" using websockets). The show page will also display a ticker of news stories specific to that coin. The user will be able to note down their thoughts on individual coins.
 
-### Code Splitting
+### Wireframes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Problems/Hurdles

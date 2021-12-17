@@ -157,11 +157,12 @@ const EachCoin = (props) => {
     return (
         <div className="row">
             <div className="column">
-                <h1>{coinContent.name}</h1>
-                <h2>{coinContent.rank}</h2>
-                <h3>{coinContent.priceUsd}</h3>
+                <br></br>
+                <h1>{coinContent.name}, {coinContent.symbol}</h1>
+                <h2>Rank: # {coinContent.rank}</h2><br></br>
+                <h4>USD: ${coinContent.priceUsd}</h4>
                 <p>{coinContent.supply}</p>
-                <p>{coinContent.changePercent24Hr}</p>
+                <p>24H Change: {coinContent.changePercent24Hr}%</p><br></br>
 
                 <div className="commentForm">
                     <form onSubmit={handleSubmit}>
