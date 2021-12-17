@@ -36,15 +36,17 @@ const alwaysOptions = (
 const Header = ({ user }) => (
 	<Navbar className='d-flex flex-row' bg='black' variant='dark' expand='sm'>
 		<Navbar.Brand>
-			<Link to='/' style={linkStyle}>
-				CryptoBytes
-			</Link>
+		<div id="cryptoByte">
+				<Link to='/' style={linkStyle}>
+					Crypto/Bytes
+				</Link>
+			</div>
 		</Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 		<Navbar.Collapse id='basic-navbar-nav'>
 			<Nav>
 				{user && (
-					<span className='navbar-text mr-2'>Welcome, {user.fullName}</span>
+					<span className='navbar-text-mr-2'>Welcome, {user.fullName}</span>
 				)}
 				{alwaysOptions}
 				{user ? authenticatedOptions : unauthenticatedOptions}
