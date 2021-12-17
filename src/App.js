@@ -23,18 +23,38 @@ const App = () => {
 	let [showCoin, setShowCoin] = useState([])
 	const [savedCoins, setSavedCoins] = useState([])
 	
-	let url = `https://api.coincap.io/v2/assets`
+	// let url = `https://api.coincap.io/v2/assets`
+	let url = "http://localhost:8000"
 
-	useEffect(() => {
-		fetch(url)
-			.then(response => response.json())
-			.then((coinData) => {
-				coinData = Object.values(coinData)
-				console.log('These are the coins', coinData)
-				setCoins(coinData[0])
-			})
-			.catch(err => console.error)
-	}, [coins])
+    useEffect(() => {
+        getCoins()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user])
+
+    const getCoins = () => {
+        fetch(url, {
+            method: 'GET',
+            credentials: 'omit',
+            redirect: 'follow'
+        })
+            .then(response => response.json())
+            .then((coinData) => {
+                coinData = Object.values(coinData)
+                console.log('Spam????');
+                setCoins(coinData[0])
+            })
+            .catch(err => console.log(err))
+    }
+	// useEffect(() => {
+	// 	fetch(url)
+	// 		.then(response => response.json())
+	// 		.then((coinData) => {
+	// 			coinData = Object.values(coinData)
+	// 			console.log('These are the coins', coinData)
+	// 			setCoins(coinData[0])
+	// 		})
+	// 		.catch(err => console.error)
+	// }, [coins])
 
 	const clearUser = () => {
 		console.log('clear user ran')
