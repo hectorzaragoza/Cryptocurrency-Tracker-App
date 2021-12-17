@@ -46,12 +46,10 @@ function Dashboard(props) {
     const allCoins = props.coins.map((c, i) => {
         return (
             <li key={i}>
-                <div>
-                    {c.name}
+                <div id="allCoins">
+                    {c.name}, {c.symbol} USD ${Number(c.priceUsd).toFixed(2)}
                     <br />
-                    ${Number(c.priceUsd).toFixed(2)}
-                    <br />
-                    <button onClick={() => addCoin(c)}>Add to Favorites</button>
+                    <button id="button" onClick={() => addCoin(c)}>Add to Favorites</button>
                 </div>
             </li>
         )
@@ -64,23 +62,32 @@ function Dashboard(props) {
                 <div>
                     <Link to={`${s.id}`}>{s.name}</Link>
                 </div>
-                <button onClick={() => removeCoin(s)}>Remove Coin</button>
+                <button id="button" onClick={() => removeCoin(s)}>Remove Coin</button>
             </li>
         )
     })
 
     return (
         <>
-            <div className="dashboard">
-                <h2>This is your dashboard</h2>
-                <h4>Followed Coins: </h4>
-                <ul>
-                    {followedCoins}
-                </ul>
-                <h4>Cryptos</h4>
-                <ul>
-                    {allCoins}
-                </ul>
+            <div className="row">
+                <div id="dashHeader"><h1><b><u>{user.fullName}'s Dashboard</u></b></h1></div>
+                <div className="column">
+                    <h4><b><u>CRYPTOS:</u></b></h4>
+                    <ul>
+                        <div className="allCoins">
+                            {allCoins}
+                        </div>
+                        
+                    </ul>
+                </div>
+                <div className="column">
+                <h4><b><u>Followed Coins:</u></b></h4>
+                    <ul>
+                        <div className="allCoins">
+                            {followedCoins}
+                        </div>
+                    </ul>
+                </div>
             </div>
         </>
     )
