@@ -21,7 +21,13 @@ function Dashboard(props) {
     const addCoin = (info) => {
         createFollowedCoin(info, user)
             .then(res => {
-                console.log("This is response: ", res)
+                getFollowedCoins(user)
+            .then(res => {
+                console.log('This is our Res for GetFOllowedCoins ', res)
+                res = Object.values(res.data.coins)
+                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                props.setSavedCoins(res)
+            })
 
             })
     }
@@ -30,7 +36,13 @@ function Dashboard(props) {
     const removeCoin = (s) => {
         deleteCoin(s._id)
             .then(res => {
-                console.log('This is the coin to be deleted: ', res)
+                getFollowedCoins(user)
+            .then(res => {
+                console.log('This is our Res for GetFOllowedCoins ', res)
+                res = Object.values(res.data.coins)
+                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                props.setSavedCoins(res)
+            })
             })
     }
 
@@ -38,7 +50,7 @@ function Dashboard(props) {
         return (
             <li key={i}>
                 <div>
-                    <Link to={`${c.id}`}>{c.name}</Link>
+                    {c.name}
                     <br />
                     ${Number(c.priceUsd).toFixed(2)}
                     <br />
