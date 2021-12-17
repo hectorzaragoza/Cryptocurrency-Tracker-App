@@ -1,8 +1,11 @@
 
 // import React, { Component, Fragment } from 'react'
 import React, { useState, useEffect, Fragment } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Link } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
+
+import { createFollowedCoin, getFollowedCoins, deleteCoin } from "./api/coindb"
+
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
@@ -23,12 +26,14 @@ const App = () => {
 	const [msgAlerts, setMsgAlerts] = useState([])
 	let [coins, setCoins] = useState([])
 	let [showCoin, setShowCoin] = useState([])
+	let [usersSavedCoins, setUsersSavedCoins] = useState([])
+	let [usersCoins, setUsersCoins] = useState([])
 	let url = "http://localhost:8000"
 
-	useEffect(()=> {
+	useEffect(() => {
 		getCoins()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[user])
+	}, [user])
 
 	const getCoins = () => {
 		fetch(url, {
@@ -44,7 +49,58 @@ const App = () => {
 			})
 			.catch(err => console.log(err))
 	}
-	
+
+	// This Function is to POST coins to the saved collection in the database
+	const addCoin = (info) => {
+		createFollowedCoin(info, user)
+			.then(res => {
+				getFollowedCoins(user)
+					.then(res => {
+						res = Object.values(res.data.coins)
+						console.log('res spam');
+						setUsersSavedCoins(res)
+					})
+			})
+	}
+
+	// This Function is to DELETE coins from the saved collection in the database
+	const removeCoin = (s) => {
+		deleteCoin(s._id)
+			.then(res => {
+				getFollowedCoins(user)
+					.then(res => {
+						res = Object.values(res.data.coins)
+						console.log('res spam');
+						setUsersSavedCoins(res)
+					})
+
+			})
+	}
+	// TRY OUT ON CLICK FUNCTION ON ADD TO FAVORITES TO SETSTATE OF FOLLOWEDCOINS TO UPDATED COINS
+	let allCoins = coins.map((c, i) => {
+		return (
+			<li key={i}>
+				<div className="coinsFromAPI">
+					<Link to={`${c.id}`}>{c.name}</Link>
+					{c.symbol}
+					${Number(c.priceUsd).toFixed(2)}
+					<button onClick={() => addCoin(c)}>Favorite</button>
+				</div>
+			</li>
+		)
+	})
+
+	usersCoins = usersSavedCoins.map((s, i) => {
+		return (
+			<li key={i}>
+				<div>
+					<Link to={`${s.id}`}>{s.name}</Link>
+					<button onClick={() => removeCoin(s)}>Remove Coin</button>
+				</div>
+			</li>
+		)
+
+	})
 
 	const clearUser = () => {
 		console.log('clear user ran')
@@ -70,6 +126,8 @@ const App = () => {
 		setShowCoin([...showCoin, e])
 	}
 
+
+
 	return (
 		<Fragment>
 			<Header user={user} />
@@ -81,8 +139,8 @@ const App = () => {
 						<RequireAuth user={user}>
 							<Dashboard
 								msgAlert={msgAlert}
-								coins={coins}
-								onClick={addShowCoin}
+								usersCoins={usersCoins}
+								allCoins={allCoins}
 								user={user} />
 						</RequireAuth>
 					}

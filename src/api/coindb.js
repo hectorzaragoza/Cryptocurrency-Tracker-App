@@ -1,6 +1,5 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
-import { useEffect } from 'react'
 
 export const createFollowedCoin = (info, user) => {
     console.log("User: ", user)
