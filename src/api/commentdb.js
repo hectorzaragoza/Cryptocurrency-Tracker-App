@@ -37,15 +37,15 @@ export const deleteComment = (id, matchedCoin) => {
     })
 }
 
-export const editCommentRoute = (comment, matchedCoin) => {
+export const editCommentRoute = (editedContent, matchedCoin) => {
 	return axios({
-		url: `${apiUrl}/dashboard/comment/${comment._id}`,
+		url: `${apiUrl}/dashboard/comment/${matchedCoin[0].comments[0]._id}`,
 		method: 'PATCH',
 		// headers: {
 		// 	Authorization: `Token token=${user.token}`,
 		// },
 		data: {
-			comment,
+			editedContent,
             matchedCoin
 		},
 	})

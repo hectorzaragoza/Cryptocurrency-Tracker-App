@@ -79,6 +79,7 @@ const App = () => {
 	const addShowCoin = (e) => {
 		setShowCoin([...showCoin, e])
 	}
+	
 
 	return (
 		<Fragment>
@@ -100,7 +101,7 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
-				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} user={user} savedCoins={savedCoins}/>}></Route>
+				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} user={user} savedCoins={savedCoins} setSavedCoins={setSavedCoins}/>}></Route>
 				<Route path="/contacts" element={<Contact />} />
 				<Route
 					path='/sign-up'
