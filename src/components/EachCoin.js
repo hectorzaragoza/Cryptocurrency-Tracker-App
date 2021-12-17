@@ -27,24 +27,28 @@ const EachCoin = (props) => {
         //This is where I can call the POST route in the commentdb api
         e.preventDefault()
         createCommentEntry(formData, user, coinContent, matchedCoin)
-        getFollowedCoins(user)
+        .then(res => {
+            getFollowedCoins(user)
             .then(res => {
                 console.log('This is our Res for GetFOllowedCoins ', res)
                 res = Object.values(res.data.coins)
                 console.log('This is our Res for 2nd GetFOllowedCoins ', res)
                 setSavedCoins(res)
             })
+        })
     }
 
     const removeComment = (c) => {
         deleteComment(c._id, matchedCoin)
-        getFollowedCoins(user)
             .then(res => {
-                console.log('This is our Res for GetFOllowedCoins ', res)
-                res = Object.values(res.data.coins)
-                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
-                setSavedCoins(res)
-            })
+                getFollowedCoins(user)
+                .then(res => {
+                    console.log('This is our Res for GetFOllowedCoins ', res)
+                    res = Object.values(res.data.coins)
+                    console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                    setSavedCoins(res)
+                })
+        })
     }
     // console.log("This is the coin content: ", matchedCoin[0].comments[0].content)
     // console.log("This is the comment content: ", matchedCoin[0].comments)
@@ -54,8 +58,18 @@ const EachCoin = (props) => {
         // This will call the PUT route in commentdb and pass
         // in the content payload, the id of the savedcoin, and 
         // the id of the comment.
-        editCommentRoute(editedContent, matchedCoin)
         e.preventDefault()
+        editCommentRoute(editedContent, matchedCoin)
+        .then(res => {
+            getFollowedCoins(user)
+            .then(res => {
+                console.log('This is our Res for GetFOllowedCoins ', res)
+                res = Object.values(res.data.coins)
+                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                setSavedCoins(res)
+            })
+        })
+        
         // console.log(`These are the three things we need:  ${editedContent} and matched coin ${matchedCoin[0]._id} and these are the comments: ${matchedCoin[0].comments[0]._id}`)
     }
 
