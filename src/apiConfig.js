@@ -1,7 +1,9 @@
 let apiUrl
 const apiUrls = {
     // YOU MUST CHANGE PRODUCTION URL WHEN DEPLOYING
-	production: 'https://crypto-bytes.herokuapp.com',
+	// LOCAL TESTING URL
+	production: 'http://localhost:8000',
+	// production: 'https://crypto-bytes.herokuapp.com',
 	development: 'http://localhost:8000',
 }
 

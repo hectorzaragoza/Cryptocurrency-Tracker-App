@@ -26,8 +26,8 @@ const App = () => {
 	let [showCoin, setShowCoin] = useState([])
 	const [savedCoins, setSavedCoins] = useState([])
 
-	// let url = `https://api.coincap.io/v2/assets`
-	let url = 'https://crypto-bytes.herokuapp.com'
+	let url = `https://api.coincap.io/v2/assets`
+	// let url = 'https://crypto-bytes.herokuapp.com'
 
 	useEffect(() => {
 		getCoins()
