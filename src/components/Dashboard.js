@@ -47,9 +47,23 @@ function Dashboard(props) {
         return (
             <li key={i}>
                 <div id="allCoins">
-                    {c.name}, {c.symbol} USD ${Number(c.priceUsd).toFixed(2)}
-                    <br />
-                    <button id="button" onClick={() => addCoin(c)}>Add to Favorites</button>
+                    <div className="coinDiv" id="allInfo">
+                        <div className="coinInfo" id="coinRank">
+                        {c.rank}
+                        </div>
+                        <div className="coinInfo" id="coinName">
+                        {c.name}
+                        </div>
+                        <div className="coinInfo" id="coinSymbol">
+                        {c.symbol}
+                        </div>
+                        <div className="coinInfo" id="coinPrice">
+                        USD ${Number(c.priceUsd).toFixed(2)}
+                        </div>
+                        <div className="coinInfo" id="coinButton">
+                        <button class="coinButton" id="button" onClick={() => addCoin(c)}>Track this Coin</button>
+                        </div> 
+                    </div>                  
                 </div>
             </li>
         )
@@ -59,7 +73,7 @@ function Dashboard(props) {
     const followedCoins = props.savedCoins.map((s, i) => {
         return (
             <li key={i}>
-                <div>
+                <div id="savedCoins">
                     <Link to={`${s.id}`}>{s.name}</Link>
                 </div>
                 <button id="button" onClick={() => removeCoin(s)}>Remove Coin</button>
@@ -72,7 +86,8 @@ function Dashboard(props) {
             <div className="row">
                 <div id="dashHeader"><h1><b><u>{user.fullName}'s Dashboard</u></b></h1></div>
                 <div className="column">
-                    <h4><b><u>CRYPTOS:</u></b></h4>
+                    <h4 class="coinHeader"><b><u>Top 100 Ranked Coins</u></b></h4>
+                    <h3 class="coinInfoHeader">Rank, Name, Symbol, Price USD</h3>
                     <ul>
                         <div className="allCoins">
                             {allCoins}
@@ -81,7 +96,7 @@ function Dashboard(props) {
                     </ul>
                 </div>
                 <div className="column">
-                <h4><b><u>Followed Coins:</u></b></h4>
+                <h4 class="coinHeader"><b><u>Followed Coins:</u></b></h4>
                     <ul>
                         <div className="allCoins">
                             {followedCoins}
