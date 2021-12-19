@@ -264,6 +264,19 @@ a:link {
   color: white;
 }
 
+.logo {
+  height: 64px;
+  width: 64px;
+}
+
+.logoDiv {
+  display: inline;
+}
+
+.contactImages {
+  height: 250px;
+  width: 250px;
+}
 
 /* LANDING PAGE STYLING */
 #homepage {
@@ -276,11 +289,3 @@ a:link {
   font-size: medium;
 }
 
-.logo {
-  height: 64px;
-  width: 64px;
-}
-
-.logoDiv {
-  display: inline;
-}
