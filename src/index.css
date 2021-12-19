@@ -197,7 +197,7 @@ a:link {
 }
 
 #coinRank {
-  width: 35px;
+  width: 85px;
   text-align: center;
   line-height: 70px;
   background-color: #f56104
@@ -231,7 +231,18 @@ a:link {
   overflow: auto;
   height: 1000px;
   flex: 50%;
+}
 
+.profile {
+  text-decoration: none;
+}
+
+.savedCoins {
+  height: 100px;
+  width: 300px;
+  background-color: lightblue;
+  margin: 0 auto;
+  text-align: center;
 }
 
 

@@ -49,7 +49,7 @@ function Dashboard(props) {
                 <div id="allCoins">
                     <div className="coinDiv" id="allInfo">
                         <div className="coinInfo" id="coinRank">
-                        {c.rank}
+                        Rank: {c.rank}
                         </div>
                         <div className="coinInfo" id="coinName">
                         {c.name}
@@ -73,10 +73,11 @@ function Dashboard(props) {
     const followedCoins = props.savedCoins.map((s, i) => {
         return (
             <li key={i}>
-                <div id="savedCoins">
+                <div className="savedCoins">
                     <Link to={`${s.id}`}>{s.name}</Link>
-                </div>
+                
                 <button id="button" onClick={() => removeCoin(s)}>Remove Coin</button>
+                </div>
             </li>
         )
     })
@@ -84,10 +85,9 @@ function Dashboard(props) {
     return (
         <>
             <div className="row">
-                <div id="dashHeader"><h1><b><u>{user.fullName}'s Dashboard</u></b></h1></div>
+                <div id="dashHeader"><h1 class="profile"><b>{user.fullName}'s Dashboard</b></h1></div>
                 <div className="column">
-                    <h4 class="coinHeader"><b><u>Top 100 Ranked Coins</u></b></h4>
-                    <h3 class="coinInfoHeader">Rank, Name, Symbol, Price USD</h3>
+                    <h4 class="coinHeader"><b><u>Top 100 Ranked Coins</u></b></h4><br></br><br></br>
                     <ul>
                         <div className="allCoins">
                             {allCoins}
@@ -96,7 +96,7 @@ function Dashboard(props) {
                     </ul>
                 </div>
                 <div className="column">
-                <h4 class="coinHeader"><b><u>Followed Coins:</u></b></h4>
+                <h4 class="coinHeader"><b><u>Followed Coins:</u></b></h4><br></br><br></br>
                     <ul>
                         <div className="allCoins">
                             {followedCoins}
