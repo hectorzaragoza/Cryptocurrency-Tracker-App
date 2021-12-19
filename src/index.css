@@ -276,3 +276,11 @@ a:link {
   font-size: medium;
 }
 
+.logo {
+  height: 64px;
+  width: 64px;
+}
+
+.logoDiv {
+  display: inline;
+}

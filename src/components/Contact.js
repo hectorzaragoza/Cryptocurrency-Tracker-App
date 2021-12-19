@@ -2,6 +2,8 @@ import hector from '../images/hector.jpeg'
 import emily from '../images/emily.jpg'
 import steven from '../images/steven.jpeg'
 import jason from '../images/jason.jpeg'
+import linkedin from '../images/linkedin.png'
+import github from '../images/github.png'
 
 const Contact = (props) => {
     // const { msgAlert, user } = props
@@ -16,23 +18,25 @@ const Contact = (props) => {
             <div class="row">
                 <div className="col-sm-3">
                     <img src={jason} height="250px" width="250px" alt="Jason"></img><br></br><br></br><h5>Jason Harr</h5>
-                    <a href="https://www.linkedin.com/in/jasonharr/" target="_blank" rel="noreferrer">https://www.linkedin.com/in/jasonharr/</a><br></br>
-                    <a href="https://github.com/harrdev" target="_blank" rel="noreferrer">https://github.com/harrdev</a>
+                    <div className="logoDiv">
+                        <a href="https://www.linkedin.com/in/jasonharr/" target="_blank" rel="noreferrer"><img className="logo" src={linkedin}></img></a><br></br><br></br>
+                        <a href="https://github.com/harrdev" target="_blank" rel="noreferrer"><img className="logo" src={github}></img></a>
+                    </div>
                 </div>
                 <div className="col-sm-3">
                     <img src={hector} height="250px" width="250px" alt="Hector"></img><br></br><br></br><h5>Hector Zaragoza</h5>
-                    <a href="https://www.linkedin.com/in/hectorzaragoza1/" target="_blank" rel="noreferrer">https://www.linkedin.com/in/hectorzaragoza1/</a><br></br>
-                    <a href="https://github.com/hectorzaragoza" target="_blank" rel="noreferrer">https://github.com/hectorzaragoza</a>
+                    <a href="https://www.linkedin.com/in/hectorzaragoza1/" target="_blank" rel="noreferrer"><img className="logo" src={linkedin}></img></a><br></br><br></br>
+                    <a href="https://github.com/hectorzaragoza" target="_blank" rel="noreferrer"><img className="logo" src={github}></img></a>
                 </div>
                 <div className="col-sm-3">
                     <img src={emily} height="250px" width="250px" alt="Emily"></img><br></br><br></br><h5>Emily Barwinczak</h5>
-                    <a href="https://www.linkedin.com/in/emilybarwinczak/" target="_blank" rel="noreferrer">https://www.linkedin.com/in/emilybarwinczak/</a><br></br>
-                    <a href="https://github.com/emilybarwinczak" target="_blank" rel="noreferrer">https://github.com/emilybarwinczak</a>
+                    <a href="https://www.linkedin.com/in/emilybarwinczak/" target="_blank" rel="noreferrer"><img className="logo" src={linkedin}></img></a><br></br><br></br>
+                    <a href="https://github.com/emilybarwinczak" target="_blank" rel="noreferrer"><img className="logo" src={github}></img></a>
                 </div>
                 <div className="col-sm-3">
                     <img src={steven} height="250px" width="250px" alt="Steven"></img><br></br><br></br><h5>Steven Lopez</h5>
-                    <a href="https://www.linkedin.com/in/steven-lopez1/" target="_blank" rel="noreferrer">https://www.linkedin.com/in/steven-lopez1/</a><br></br>
-                    <a href="https://github.com/steven43533" target="_blank" rel="noreferrer">https://github.com/steven43533</a>
+                    <a href="https://www.linkedin.com/in/steven-lopez1/" target="_blank" rel="noreferrer"><img className="logo" src={linkedin}></img></a><br></br><br></br>
+                    <a href="https://github.com/steven43533" target="_blank" rel="noreferrer"><img className="logo" src={github}></img></a>
                 </div>
             </div>
         </div>
