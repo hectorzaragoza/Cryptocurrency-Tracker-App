@@ -8,9 +8,9 @@ function Dashboard(props) {
     useEffect(() => {
         getFollowedCoins(user)
             .then(res => {
-                console.log('This is our Res for GetFOllowedCoins ', res)
+                // console.log('This is our Res for GetFOllowedCoins ', res)
                 res = Object.values(res.data.coins)
-                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
                 props.setSavedCoins(res)
             })
     }, [])
@@ -21,9 +21,9 @@ function Dashboard(props) {
             .then(res => {
                 getFollowedCoins(user)
             .then(res => {
-                console.log('This is our Res for GetFOllowedCoins ', res)
+                // console.log('This is our Res for GetFOllowedCoins ', res)
                 res = Object.values(res.data.coins)
-                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
                 props.setSavedCoins(res)
             })
             })
@@ -35,9 +35,9 @@ function Dashboard(props) {
             .then(res => {
                 getFollowedCoins(user)
             .then(res => {
-                console.log('This is our Res for GetFOllowedCoins ', res)
+                // console.log('This is our Res for GetFOllowedCoins ', res)
                 res = Object.values(res.data.coins)
-                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
                 props.setSavedCoins(res)
             })
             })

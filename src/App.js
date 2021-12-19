@@ -48,6 +48,8 @@ const App = () => {
 			})
 			.catch(err => console.log(err))
 	}
+
+	
 	// useEffect(() => {
 	// 	fetch(url)
 	// 		.then(response => response.json())

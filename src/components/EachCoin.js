@@ -31,15 +31,68 @@ const EachCoin = (props) => {
     coinContent = coinContent[0]
 
     const matchedCoin = savedCoins.filter(matchedCoin => matchedCoin.id === coinName.id)
-    console.log('This is the matchedCoin: ', matchedCoin)
+    // console.log('This is the matchedCoin: ', matchedCoin)
     // This is the state to hold the form content
     const [formData, setFormData] = useState('')
     // This is the state to hold the edit form content
     const [editedContent, setEditedContent] = useState('')
+    // This state will hold matchedCoin (showpage) historical data
+    const [ histData, setHistData ] = useState([])
+    // This state will hold ALL DATA for the Chart
+    const [data, setData] = useState({})
+    const labelArray = []
+    // This fetch call will get the historical data for the showCoin
     
+    useEffect(() => {
+        getHistData()
+    }, [data])
+
+    const getHistData = () => {
+		fetch(`http://localhost:8000/dashboard/${matchedCoin[0].id}`, {
+			method: 'GET',
+			credentials: 'omit',
+			redirect: 'follow'
+		})
+			.then(response => response.json())
+			.then((coinData) => {
+				coinData = Object.values(coinData)
+				console.log('This is the hist coin route fetch call response: ', coinData[0]);
+				let result = coinData[0].map(({ priceUsd }) => parseInt(priceUsd))
+                console.log('This is the array of hist prices: ', result)
+                setHistData(result)
+                
+			}).then(res => {
+                for(let i = 0; i < histData.length; i++) {
+                    labelArray.push(`${i}`)
+                    }
+                console.log('HIST DTSATA', histData)
+                console.log('DATA: ', data)
+                chart()
+            })
+			.catch(err => console.log(err))
+	}
+
+    const chart = () => {
+        console.log('Chart Label Array lenght', labelArray.length)
+        console.log('Chart hist Data Array ', histData.length)
+        setData({
+            labels: labelArray,
+            datasets: [
+                {
+                    label: 'Linegraph example',
+                    data: histData,
+                    fill: false,
+                    borderColor: 'rgb(75,192,192)',
+                    tension: 0.1
+                }
+            ]
+        })
+    }
+
+
 
     const handleChange = (e) => {
-        console.log('This is the event returned from the form: ', e.target.value)
+        // console.log('This is the event returned from the form: ', e.target.value)
         setFormData(e.target.value)
     }
 
@@ -50,9 +103,9 @@ const EachCoin = (props) => {
         .then(res => {
             getFollowedCoins(user)
             .then(res => {
-                console.log('This is our Res for GetFOllowedCoins ', res)
+                // console.log('This is our Res for GetFOllowedCoins ', res)
                 res = Object.values(res.data.coins)
-                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
                 setSavedCoins(res)
             })
         })
@@ -63,9 +116,9 @@ const EachCoin = (props) => {
             .then(res => {
                 getFollowedCoins(user)
                 .then(res => {
-                    console.log('This is our Res for GetFOllowedCoins ', res)
+                    // console.log('This is our Res for GetFOllowedCoins ', res)
                     res = Object.values(res.data.coins)
-                    console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                    // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
                     setSavedCoins(res)
                 })
         })
@@ -83,9 +136,9 @@ const EachCoin = (props) => {
         .then(res => {
             getFollowedCoins(user)
             .then(res => {
-                console.log('This is our Res for GetFOllowedCoins ', res)
+                // console.log('This is our Res for GetFOllowedCoins ', res)
                 res = Object.values(res.data.coins)
-                console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
                 setSavedCoins(res)
             })
         })
@@ -95,16 +148,15 @@ const EachCoin = (props) => {
 
     const handleEditChange = (editFormContent) => {
         // This will set the state of  the edit form content
-        console.log('onchange content, ', editFormContent.target.value)
+        // console.log('onchange content, ', editFormContent.target.value)
         setEditedContent(editFormContent.target.value)
     }
 
     const editComment = (c) => {
-        console.log('This is the editComment before return', c)
+        // console.log('This is the editComment before return', c)
         editCommentRoute(editedContent, matchedCoin)
         return (
             <>
-                {console.log('This is the edit Comment after return')}
                 <form onSubmit={handleEditSubmit}>
                     <label htmlFor="editForm">Edit Comment on: {c.name}?</label>
                     <br />
@@ -116,25 +168,11 @@ const EachCoin = (props) => {
         )
     }
 
-    const [data, setData] = useState({})
-    const chart = () => {
-        setData({
-            labels: ["Coin1", "Coin2", "Coin3", "Coin4", "Coin5", "Coin6", "Coin7", "Coin8"],
-            datasets: [
-                {
-                    label: 'Linegraph example',
-                    data: [54, 76, 23, 13, 76, 12, 54, 76],
-                    fill: false,
-                    borderColor: 'rgb(75,192,192)',
-                    tension: 0.1
-                }
-            ]
-        })
-    }
+    
 
-    useEffect(() => {
-        chart()
-    }, [])
+    // useEffect(() => {
+    //     chart()
+    // }, [])
 
     const comments = matchedCoin[0].comments.map((c, i) => {
         // console.log('This the coin holding the comment: ', c)
@@ -183,7 +221,7 @@ const EachCoin = (props) => {
                 </ul>
             </div>
             <div className="column">
-                <h1>Dummy data</h1>
+                <h1>{matchedCoin[0].id}'s Year in Price</h1>
                 <div style={{ height: "400px", width: "400px" }}>
                     <Line data={data} />
                 </div>
