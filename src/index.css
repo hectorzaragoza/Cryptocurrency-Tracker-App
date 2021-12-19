@@ -120,9 +120,6 @@ a:link {
   align-content: space-between;
 }
 
-
-
-
 /* DASHBOARD STYLING  */
 
 #dashboard {
@@ -154,17 +151,87 @@ a:link {
   display: flex; */
 }
 
+#button {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #FFFFFF;
+  background-color: rgba(7, 240, 26, 0.4);
+  text-align: center;
+  transition: all 0.2s;
+  font-size: 15px;
+}
+
+#button:hover {
+  background-color: #f56104;
+}
+
+@media all and (max-width:30em) {
+  #button {
+    display: block;
+    margin: 0.2em auto;
+  }
+}
+
+.coinHeader {
+  font-size: 35px;
+  color: green;
+}
+
+.coinDiv {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 22px;
+  border: 1px solid green;
+  text-align: center;
+  background-color:hsla(200, 40%, 30%, .4)
+}
+
+#allCoins {
+  text-align: center;
+}
+
+#coinRank {
+  width: 35px;
+  text-align: center;
+  line-height: 70px;
+  background-color: #f56104
+}
+
+#coinName {
+  width: 200px;
+  text-align: center;
+  line-height: 70px;
+}
+
+#coinSymbol {
+  width: 125px;
+  text-align: center;
+  line-height: 70px;
+}
+
+#coinPrice {
+  width: 250px;
+  text-align: center;
+  line-height: 70px;
+}
+
+#coinButton {
+  text-align: center;
+  margin: 10px auto;
+  margin-top: 18px;
+}
+
 .allCoins {
   overflow: auto;
   height: 1000px;
   flex: 50%;
 
-}
-
-#button {
-  font-family: 'Roboto', sans-serif;
-  background-color: rgba(192, 192, 205, 0.601);
-  color: rgba(0, 0, 1, 0.683)
 }
 
 
@@ -198,76 +265,3 @@ a:link {
   font-size: medium;
 }
 
-#button {
-  display: inline-block;
-  padding: 0.3em 1.2em;
-  margin: 0 0.3em 0.3em 0;
-  border-radius: 2em;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  color: #FFFFFF;
-  background-color: rgb(233, 112, 6);
-  text-align: center;
-  transition: all 0.2s;
-  font-size: 15px;
-}
-
-#button:hover {
-  background-color: #b16f36;
-}
-
-@media all and (max-width:30em) {
-  #button {
-    display: block;
-    margin: 0.2em auto;
-  }
-}
-
-.coinHeader {
-  font-size: 35px;
-  color: green;
-}
-
-.coinDiv {
-  display: flex;
-  justify-content: flex-start;
-  font-size: 22px;
-  border: 1px solid green;
-  text-align: center;
-  background-color:hsla(200, 40%, 30%, .4)
-}
-
-#allCoins {
-  text-align: center;
-}
-
-#coinRank {
-  width: 35px;
-  text-align: center;
-  line-height: 70px;
-}
-
-#coinName {
-  width: 200px;
-  text-align: center;
-  line-height: 70px;
-}
-
-#coinSymbol {
-  width: 125px;
-  text-align: center;
-  line-height: 70px;
-}
-
-#coinPrice {
-  width: 250px;
-  text-align: center;
-  line-height: 70px;
-}
-
-#coinButton {
-  text-align: center;
-  margin: 10px auto;
-}
