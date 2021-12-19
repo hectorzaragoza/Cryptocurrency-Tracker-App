@@ -6,7 +6,6 @@ import linkedin from '../images/linkedin.png'
 import github from '../images/github.png'
 
 const Contact = (props) => {
-    // const { msgAlert, user } = props
     console.log('props in home', props)
     return (
         <div className="contact">
@@ -41,8 +40,5 @@ const Contact = (props) => {
         </div>
     )
 }
-
-
-
 
 export default Contact

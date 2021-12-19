@@ -89,8 +89,6 @@ const EachCoin = (props) => {
         })
     }
 
-
-
     const handleChange = (e) => {
         // console.log('This is the event returned from the form: ', e.target.value)
         setFormData(e.target.value)
@@ -167,8 +165,6 @@ const EachCoin = (props) => {
             </>
         )
     }
-
-    
 
     // useEffect(() => {
     //     chart()

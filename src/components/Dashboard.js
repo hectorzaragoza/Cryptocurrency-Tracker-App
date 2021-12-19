@@ -61,7 +61,7 @@ function Dashboard(props) {
                             USD ${Number(c.priceUsd).toFixed(2)}
                         </div>
                         <div className="coinInfo" id="coinButton">
-                            <button class="coinButton" id="button" onClick={() => addCoin(c)}>Track this Coin</button>
+                            <button className="button" onClick={() => addCoin(c)}>Track this Coin</button>
                         </div>
                     </div>
                 </div>
@@ -69,13 +69,17 @@ function Dashboard(props) {
         )
     })
 
-
     const followedCoins = props.savedCoins.map((s, i) => {
         return (
             <li key={i}>
                 <div className="savedCoins">
-                    <Link to={`${s.id}`}>{s.name}</Link>
-                    <button id="button" onClick={() => removeCoin(s)}>Remove Coin</button>
+                    <h4 className="savedInfo">Click for info</h4>
+                    <div className="savedCoinItem">
+                        <Link to={`${s.id}`} style={{ fontSize: "25px", padding: "15px" }}>{s.name}</Link>
+                    </div>
+                    <div className="savedCoinItem">
+                        <button className="removeButton" onClick={() => removeCoin(s)}>Untrack</button>
+                    </div>
                 </div>
             </li>
         )

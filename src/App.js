@@ -1,11 +1,6 @@
-
-// import React, { Component, Fragment } from 'react'
 import React, { useState, useEffect, Fragment } from 'react'
 import { Route, Routes, Link } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-
-
-// import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/shared/Header'
 import RequireAuth from './components/shared/RequireAuth'
@@ -49,18 +44,6 @@ const App = () => {
 			.catch(err => console.log(err))
 	}
 
-	
-	// useEffect(() => {
-	// 	fetch(url)
-	// 		.then(response => response.json())
-	// 		.then((coinData) => {
-	// 			coinData = Object.values(coinData)
-	// 			console.log('These are the coins', coinData)
-	// 			setCoins(coinData[0])
-	// 		})
-	// 		.catch(err => console.error)
-	// }, [coins])
-
 	const clearUser = () => {
 		console.log('clear user ran')
 		setUser(null)
@@ -84,9 +67,6 @@ const App = () => {
 	const addShowCoin = (e) => {
 		setShowCoin([...showCoin, e])
 	}
-	
-
-
 
 	return (
 		<Fragment>
@@ -109,12 +89,12 @@ const App = () => {
 					}
 				/>
 				<Route path="/dashboard/:id" element={
-				<EachCoin
-					coinData={coins}
-					user={user}
-					savedCoins={savedCoins} 
-					setSavedCoins={setSavedCoins}
-				/>
+					<EachCoin
+						coinData={coins}
+						user={user}
+						savedCoins={savedCoins}
+						setSavedCoins={setSavedCoins}
+					/>
 				}
 				>
 				</Route>
@@ -154,7 +134,6 @@ const App = () => {
 				/>
 			))}
 		</Fragment>
-
 	)
 }
 
