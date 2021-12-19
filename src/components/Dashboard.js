@@ -20,12 +20,12 @@ function Dashboard(props) {
         createFollowedCoin(info, user)
             .then(res => {
                 getFollowedCoins(user)
-            .then(res => {
-                // console.log('This is our Res for GetFOllowedCoins ', res)
-                res = Object.values(res.data.coins)
-                // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
-                props.setSavedCoins(res)
-            })
+                    .then(res => {
+                        // console.log('This is our Res for GetFOllowedCoins ', res)
+                        res = Object.values(res.data.coins)
+                        // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                        props.setSavedCoins(res)
+                    })
             })
     }
 
@@ -34,12 +34,12 @@ function Dashboard(props) {
         deleteCoin(s._id)
             .then(res => {
                 getFollowedCoins(user)
-            .then(res => {
-                // console.log('This is our Res for GetFOllowedCoins ', res)
-                res = Object.values(res.data.coins)
-                // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
-                props.setSavedCoins(res)
-            })
+                    .then(res => {
+                        // console.log('This is our Res for GetFOllowedCoins ', res)
+                        res = Object.values(res.data.coins)
+                        // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                        props.setSavedCoins(res)
+                    })
             })
     }
 
@@ -49,21 +49,21 @@ function Dashboard(props) {
                 <div id="allCoins">
                     <div className="coinDiv" id="allInfo">
                         <div className="coinInfo" id="coinRank">
-                        Rank: {c.rank}
+                            Rank: {c.rank}
                         </div>
                         <div className="coinInfo" id="coinName">
-                        {c.name}
+                            {c.name}
                         </div>
                         <div className="coinInfo" id="coinSymbol">
-                        {c.symbol}
+                            {c.symbol}
                         </div>
                         <div className="coinInfo" id="coinPrice">
-                        USD ${Number(c.priceUsd).toFixed(2)}
+                            USD ${Number(c.priceUsd).toFixed(2)}
                         </div>
                         <div className="coinInfo" id="coinButton">
-                        <button class="coinButton" id="button" onClick={() => addCoin(c)}>Track this Coin</button>
-                        </div> 
-                    </div>                  
+                            <button class="coinButton" id="button" onClick={() => addCoin(c)}>Track this Coin</button>
+                        </div>
+                    </div>
                 </div>
             </li>
         )
@@ -75,8 +75,7 @@ function Dashboard(props) {
             <li key={i}>
                 <div className="savedCoins">
                     <Link to={`${s.id}`}>{s.name}</Link>
-                
-                <button id="button" onClick={() => removeCoin(s)}>Remove Coin</button>
+                    <button id="button" onClick={() => removeCoin(s)}>Remove Coin</button>
                 </div>
             </li>
         )
@@ -92,11 +91,11 @@ function Dashboard(props) {
                         <div className="allCoins">
                             {allCoins}
                         </div>
-                        
+
                     </ul>
                 </div>
                 <div className="column">
-                <h4 class="coinHeader"><b><u>Followed Coins:</u></b></h4><br></br><br></br>
+                    <h4 class="coinHeader"><b><u>Followed Coins:</u></b></h4><br></br><br></br>
                     <ul>
                         <div className="allCoins">
                             {followedCoins}
