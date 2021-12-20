@@ -265,7 +265,7 @@ a:link {
 
 .savedCoins {
   height: 45px;
-  width: 500px;
+  width: 700px;
   background-color:hsla(200, 40%, 30%, .4);
   border: 1px solid green;
   margin: 0 auto;
@@ -328,3 +328,16 @@ a:link {
   font-size: medium;
 }
 
+/* EACH COIN PAGE STYOLING */
+.container {
+  width: 500px;
+  margin-top: 30%;
+}
+
+.chart {
+  margin: 0 auto;
+}
+
+.savedCoinHead {
+  color: #f56104;
+}

@@ -99,7 +99,7 @@ function Dashboard(props) {
                     </ul>
                 </div>
                 <div className="column">
-                    <h4 className="coinHeader"><b><u>Followed Coins:</u></b></h4><br></br><br></br>
+                    <h4 className="coinHeader"><b><u>Followed Coins</u></b></h4><br></br><br></br>
                     <ul>
                         <div className="allCoins">
                             {followedCoins}

@@ -37,49 +37,49 @@ const EachCoin = (props) => {
     // This is the state to hold the edit form content
     const [editedContent, setEditedContent] = useState('')
     // This state will hold matchedCoin (showpage) historical data
-    const [ histData, setHistData ] = useState([])
+    const [histData, setHistData] = useState([])
     // This state will hold ALL DATA for the Chart
     const [data, setData] = useState({})
     const labelArray = []
 
     // Dummy array for updating chart once
-    const [ dummyArray, setDummyArray ] = useState('0')
+    const [dummyArray, setDummyArray] = useState('0')
     const arrayUpdater = () => {
         setDummyArray('1')
         console.log('Dummy ARray: ', dummyArray)
     }
 
     // This fetch call will get the historical data for the showCoin
-    
+
 
     useEffect(() => {
         getHistData()
     }, [dummyArray])
 
     const getHistData = () => {
-		fetch(`http://localhost:8000/dashboard/${matchedCoin[0].id}`, {
-			method: 'GET',
-			credentials: 'omit',
-			redirect: 'follow'
-		})
-			.then(response => response.json())
-			.then((coinData) => {
-				coinData = Object.values(coinData)
-				let result = coinData[0].map(({ priceUsd }) => parseInt(priceUsd))
+        fetch(`http://localhost:8000/dashboard/${matchedCoin[0].id}`, {
+            method: 'GET',
+            credentials: 'omit',
+            redirect: 'follow'
+        })
+            .then(response => response.json())
+            .then((coinData) => {
+                coinData = Object.values(coinData)
+                let result = coinData[0].map(({ priceUsd }) => parseInt(priceUsd))
                 setHistData(result)
-			}).then(res => {
+            }).then(res => {
                 arrayUpdater()
             })
             .then(res => {
                 chart()
             })
-			.catch(err => console.log(err))
-	}
+            .catch(err => console.log(err))
+    }
 
     const chart = () => {
-        for(let i = 0; i < histData.length; i++) {
+        for (let i = 0; i < histData.length; i++) {
             labelArray.push(`${i}`)
-            }
+        }
         setData({
             labels: labelArray,
             datasets: [
@@ -88,13 +88,14 @@ const EachCoin = (props) => {
                     data: histData,
                     fill: false,
                     borderColor: 'rgb(75,192,192)',
-                    tension: 0.1
+                    tension: 0.1,
+                    responsive: true,
                 }
             ]
         })
     }
 
-    
+
 
     const handleChange = (e) => {
         // console.log('This is the event returned from the form: ', e.target.value)
@@ -105,28 +106,28 @@ const EachCoin = (props) => {
         //This is where I can call the POST route in the commentdb api
         e.preventDefault()
         createCommentEntry(formData, user, coinContent, matchedCoin)
-        .then(res => {
-            getFollowedCoins(user)
             .then(res => {
-                // console.log('This is our Res for GetFOllowedCoins ', res)
-                res = Object.values(res.data.coins)
-                // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
-                setSavedCoins(res)
+                getFollowedCoins(user)
+                    .then(res => {
+                        // console.log('This is our Res for GetFOllowedCoins ', res)
+                        res = Object.values(res.data.coins)
+                        // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                        setSavedCoins(res)
+                    })
             })
-        })
     }
 
     const removeComment = (c) => {
         deleteComment(c._id, matchedCoin)
             .then(res => {
                 getFollowedCoins(user)
-                .then(res => {
-                    // console.log('This is our Res for GetFOllowedCoins ', res)
-                    res = Object.values(res.data.coins)
-                    // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
-                    setSavedCoins(res)
-                })
-        })
+                    .then(res => {
+                        // console.log('This is our Res for GetFOllowedCoins ', res)
+                        res = Object.values(res.data.coins)
+                        // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                        setSavedCoins(res)
+                    })
+            })
     }
     // console.log("This is the coin content: ", matchedCoin[0].comments[0].content)
     // console.log("This is the comment content: ", matchedCoin[0].comments)
@@ -138,16 +139,16 @@ const EachCoin = (props) => {
         // the id of the comment.
         e.preventDefault()
         editCommentRoute(editedContent, matchedCoin)
-        .then(res => {
-            getFollowedCoins(user)
             .then(res => {
-                // console.log('This is our Res for GetFOllowedCoins ', res)
-                res = Object.values(res.data.coins)
-                // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
-                setSavedCoins(res)
+                getFollowedCoins(user)
+                    .then(res => {
+                        // console.log('This is our Res for GetFOllowedCoins ', res)
+                        res = Object.values(res.data.coins)
+                        // console.log('This is our Res for 2nd GetFOllowedCoins ', res)
+                        setSavedCoins(res)
+                    })
             })
-        })
-        
+
         // console.log(`These are the three things we need:  ${editedContent} and matched coin ${matchedCoin[0]._id} and these are the comments: ${matchedCoin[0].comments[0]._id}`)
     }
 
@@ -173,22 +174,18 @@ const EachCoin = (props) => {
         )
     }
 
-    // useEffect(() => {
-    //     chart()
-    // }, [])
-
     const comments = matchedCoin[0].comments.map((c, i) => {
         // console.log('This the coin holding the comment: ', c)
         return (
             <li key={i}>
                 {c.content}
-                <br/>
+                <br />
                 <button onClick={() => removeComment(c)} id="delete">Delete</button>
                 <form onSubmit={handleEditSubmit}>
                     <label htmlFor="editForm">Edit Comment</label>
-                    <br/>
-                    <input type="text" id="editForm" placeholder={c.content} onChange={handleEditChange}/>
-                    <br/>
+                    <br />
+                    <input type="text" id="editForm" placeholder={c.content} onChange={handleEditChange} />
+                    <br />
                     <input type="submit" value="Edit"></input>
                 </form>
             </li>
@@ -198,35 +195,39 @@ const EachCoin = (props) => {
     return (
         <div className="row">
             <div className="column">
-                <br></br>
-                <h1>{coinContent.name}, {coinContent.symbol}</h1>
-                <h2>Rank: # {coinContent.rank}</h2><br></br>
-                <h4>USD: ${coinContent.priceUsd}</h4>
-                <p>{coinContent.supply}</p>
-                <p>24H Change: {coinContent.changePercent24Hr}%</p><br></br>
+                <div className="container">
+                    <br></br>
+                    <h1 className="savedCoinHead">{coinContent.name}, {coinContent.symbol}</h1>
+                    <h2>Rank: # {coinContent.rank}</h2><br></br>
+                    <h4>USD: ${coinContent.priceUsd}</h4>
+                    <p>Supply: {coinContent.supply}</p>
+                    <p>24H Change: {coinContent.changePercent24Hr}%</p><br></br>
 
-                <div className="commentForm">
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="textArea">Thoughts on {coinContent.symbol}?</label>
-                        <br />
-                        <input id="textArea" onChange={handleChange} />
-                        <br />
-                        <input type="submit" value="Post"></input>
-                    </form>
+                    <div className="commentForm">
+                        <form onSubmit={handleSubmit}>
+                            <label htmlFor="textArea">Thoughts on {coinContent.symbol}?</label>
+                            <br />
+                            <input id="textArea" onChange={handleChange} />
+                            <br />
+                            <input type="submit" value="Post"></input>
+                        </form>
+                    </div>
+
+                    <div>
+                        {editComment}
+                    </div>
+
+                    <ul className="comments">
+                        {comments}
+                    </ul>
                 </div>
-
-                <div>
-                    {editComment}
-                </div>
-
-                <ul className="comments">
-                    {comments}
-                </ul>
             </div>
             <div className="column">
-                <h1>{matchedCoin[0].symbol}: Year in Price</h1>
-                <div style={{ height: "400px", width: "400px" }}>
-                    <Line data={data} />
+                <div className="container">
+                    <h1 className="savedCoinHead">{matchedCoin[0].symbol}: Year in Price</h1>
+                    <div className="chart" style={{ height: "400px", width: "400px" }}>
+                        <Line data={data} />
+                    </div>
                 </div>
             </div>
         </div>
