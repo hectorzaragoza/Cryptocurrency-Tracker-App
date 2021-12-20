@@ -41,11 +41,20 @@ const EachCoin = (props) => {
     // This state will hold ALL DATA for the Chart
     const [data, setData] = useState({})
     const labelArray = []
+
+    // Dummy array for updating chart once
+    const [ dummyArray, setDummyArray ] = useState('0')
+    const arrayUpdater = () => {
+        setDummyArray('1')
+        console.log('Dummy ARray: ', dummyArray)
+    }
+
     // This fetch call will get the historical data for the showCoin
     
+
     useEffect(() => {
         getHistData()
-    }, [data])
+    }, [dummyArray])
 
     const getHistData = () => {
 		fetch(`http://localhost:8000/dashboard/${matchedCoin[0].id}`, {
@@ -56,30 +65,26 @@ const EachCoin = (props) => {
 			.then(response => response.json())
 			.then((coinData) => {
 				coinData = Object.values(coinData)
-				console.log('This is the hist coin route fetch call response: ', coinData[0]);
 				let result = coinData[0].map(({ priceUsd }) => parseInt(priceUsd))
-                console.log('This is the array of hist prices: ', result)
                 setHistData(result)
-                
 			}).then(res => {
-                for(let i = 0; i < histData.length; i++) {
-                    labelArray.push(`${i}`)
-                    }
-                console.log('HIST DTSATA', histData)
-                console.log('DATA: ', data)
+                arrayUpdater()
+            })
+            .then(res => {
                 chart()
             })
 			.catch(err => console.log(err))
 	}
 
     const chart = () => {
-        console.log('Chart Label Array lenght', labelArray.length)
-        console.log('Chart hist Data Array ', histData.length)
+        for(let i = 0; i < histData.length; i++) {
+            labelArray.push(`${i}`)
+            }
         setData({
             labels: labelArray,
             datasets: [
                 {
-                    label: 'Linegraph example',
+                    label: `${matchedCoin[0].symbol}`,
                     data: histData,
                     fill: false,
                     borderColor: 'rgb(75,192,192)',
@@ -88,6 +93,8 @@ const EachCoin = (props) => {
             ]
         })
     }
+
+    
 
     const handleChange = (e) => {
         // console.log('This is the event returned from the form: ', e.target.value)
@@ -217,7 +224,7 @@ const EachCoin = (props) => {
                 </ul>
             </div>
             <div className="column">
-                <h1>{matchedCoin[0].id}'s Year in Price</h1>
+                <h1>{matchedCoin[0].symbol}: Year in Price</h1>
                 <div style={{ height: "400px", width: "400px" }}>
                     <Line data={data} />
                 </div>
