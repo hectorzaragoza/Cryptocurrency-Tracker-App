@@ -57,7 +57,7 @@ const EachCoin = (props) => {
     }, [dummyArray])
 
     const getHistData = () => {
-        fetch(`http://localhost:8000/dashboard/${matchedCoin[0].id}`, {
+        fetch(`https://crypto-bytes.herokuapp.com/dashboard/${matchedCoin[0].id}`, {
             method: 'GET',
             credentials: 'omit',
             redirect: 'follow'
