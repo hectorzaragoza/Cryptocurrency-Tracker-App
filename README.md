@@ -23,13 +23,16 @@ Cryptocurrency based website that displays cryptocurrencies and attributes of ea
 - Express
 - Bootstrap
 
+### Routes: 
+<img width="1236" alt="routes-diagram" src="https://i.postimg.cc/4d2Cz2Zm/Copy-of-proj-3-readme.png">
+
 ### Installation Instructions
 - npm i
 - run 'nodemon' on the server side and 'npm start' on the client side
-- use the folling as an API_KEY=16d58009-528d-4a65-9107-71d3c124a0f6
+- use the following as an API_KEY=16d58009-528d-4a65-9107-71d3c124a0f6
 
 ### User Stories
 User can create a profile to visit a page to learn more about what cryptocurrencies are, then have a dashboard that shows the top cryptocurrencies (stretch goal: ticker of general crypto news stories a la News of the World), the user can select coins to add to their "Follow" list and upon pressing on one, be led to a show page that shows a line graph of the specific coin's historical data. (stretch goal: make this run in "real-time" using websockets). The show page will also display a ticker of news stories specific to that coin. The user will be able to note down their thoughts on individual coins.
 
-### Link to Other Repo
+### Link to Server Repo
 - https://github.com/harrdev/server-cryptoBytes
