@@ -21,8 +21,8 @@ const App = () => {
 	let [showCoin, setShowCoin] = useState([])
 	const [savedCoins, setSavedCoins] = useState([])
 
-	let url = "http://localhost:8000"
-	// let url = 'https://crypto-bytes.herokuapp.com'
+	// let url = "http://localhost:8000"
+	let url = 'https://crypto-bytes.herokuapp.com'
 
 	useEffect(() => {
 		getCoins()
