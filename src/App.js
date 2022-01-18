@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { Route, Routes, Link } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/shared/Header'
@@ -21,12 +21,11 @@ const App = () => {
 	let [showCoin, setShowCoin] = useState([])
 	const [savedCoins, setSavedCoins] = useState([])
 
-	// let url = "http://localhost:8000"
+	// let url = "http://localhost:8000" 
 	let url = 'https://crypto-bytes.herokuapp.com'
 
 	useEffect(() => {
 		getCoins()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user])
 
 	const getCoins = () => {

@@ -6,7 +6,6 @@ export const createCommentEntry = (content, user, coinContent, matchedCoin) => {
     console.log('This is the user from the form: ', user)
     console.log('This is the coin from the eachCoin component: ', coinContent)
     console.log('This our matched coin id: ', matchedCoin[0]._id)
-    // const coinId = matchedCoin[0]._id
     return axios({
         method: 'POST',
         headers: {

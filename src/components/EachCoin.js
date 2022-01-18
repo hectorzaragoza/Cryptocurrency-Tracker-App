@@ -50,8 +50,6 @@ const EachCoin = (props) => {
     }
 
     // This fetch call will get the historical data for the showCoin
-
-
     useEffect(() => {
         getHistData()
     }, [dummyArray])
@@ -154,12 +152,10 @@ const EachCoin = (props) => {
 
     const handleEditChange = (editFormContent) => {
         // This will set the state of  the edit form content
-        // console.log('onchange content, ', editFormContent.target.value)
         setEditedContent(editFormContent.target.value)
     }
 
     const editComment = (c) => {
-        // console.log('This is the editComment before return', c)
         editCommentRoute(editedContent, matchedCoin)
         return (
             <>

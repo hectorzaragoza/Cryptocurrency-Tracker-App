@@ -7,7 +7,6 @@ const linkStyle = {
 	textDecoration: 'none'
 }
 
-//<NavLink className="signOut" style={linkStyle} to="sign-out">Sign Out</NavLink>
 const authenticatedOptions = (
 
 	<div className='authOptions'>
