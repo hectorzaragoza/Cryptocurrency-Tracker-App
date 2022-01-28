@@ -1,6 +1,8 @@
 # Crypto/Byte
 <img width="789" alt="crypto ish" src="https://user-images.githubusercontent.com/92114356/146703954-90a955e9-3cac-4f50-a2e4-f5d92c5ac8a9.png">
 
+## Live Site: http://cryptobyte.herokuapp.com/
+
 ### Pitch
 Cryptocurrency based website that displays cryptocurrencies and attributes of each coin. Making requests from the Coincap API. Be able to create an account with a username/password/email. With an account you can save specific cryptos to a list and also add a footnote under each saved crypto(ex: your personal thoughts on a crypto or market predictions). Upon clicking a crypto be lead to a new page displaying more information and history of the coin/a line graph depicting price history.
 
